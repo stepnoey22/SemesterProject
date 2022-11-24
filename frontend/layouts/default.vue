@@ -1,6 +1,6 @@
 <template>
   <v-app dark>
-    <v-navigation-drawer
+  <!--  <v-navigation-drawer
       v-model="drawer"
       :mini-variant="miniVariant"
       :clipped="clipped"
@@ -56,13 +56,13 @@
       >
         <v-icon>mdi-menu</v-icon>
       </v-btn>
-    </v-app-bar>
-    <v-main>
-      <v-container>
+    </v-app-bar>-->
+    <v-main> 
+      <!-- <v-container> -->
         <Nuxt />
-      </v-container>
-    </v-main>
-    <v-navigation-drawer
+      <!-- </v-container> -->
+     </v-main>
+  <!-- <v-navigation-drawer
       v-model="rightDrawer"
       :right="right"
       temporary
@@ -84,8 +84,8 @@
       app
     >
       <span>&copy; {{ new Date().getFullYear() }}</span>
-    </v-footer>
-  </v-app>
+    </v-footer>-->
+  </v-app> 
 </template>
 
 <script>
