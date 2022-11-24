@@ -303,7 +303,7 @@ export default {
   position: relative;
   display: inline-block;
   font-size: 40px;
-  color: rgb(0, 0, 0);
+  color: rgb(255, 255, 255);
   text-transform: uppercase;
   animation: flip 2s infinite;
   animation-delay: calc(.1s * var(--i))
