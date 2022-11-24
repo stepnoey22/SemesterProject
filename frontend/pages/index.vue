@@ -132,9 +132,6 @@
             </tr>
           </thead>
           <!--  -->
-
-          <!--  -->
-
           <tbody>
             <tr v-for="(item, index) in desserts" :key="index">
               <td>{{ index + 1 }}</td>
@@ -148,17 +145,14 @@
                     mdi-delete
                   </v-icon>
                 </template>
-
               </td>
             </tr>
           </tbody>
         </template>
-
       </v-simple-table>
     </v-card>
   </div>
 </template>
-
 
 <script>
 const URL = "";
@@ -286,19 +280,14 @@ export default {
 <style scoped>
 .animate__animated.animate__bounce {
   --animate-duration: 2s;
-
 }
-
 :root {
-
   --animate-duration: 600ms;
   --animate-delay: 0.9s;
 }
-
 .waviy {
   position: relative;
 }
-
 .waviy span {
   position: relative;
   display: inline-block;
@@ -308,15 +297,12 @@ export default {
   animation: flip 2s infinite;
   animation-delay: calc(.1s * var(--i))
 }
-
 @keyframes flip {
-
   0%,
   80% {
     transform: rotateY(360deg)
   }
 }
-
 .neonText {
   color: #fff;
   text-shadow:
@@ -329,7 +315,6 @@ export default {
     0 0 102px #bc13fe,
     0 0 151px #bc13fe;
 }
-
 .neon {
   font-size: 6.2rem;
   animation: pulsate 1s infinite alternate;
@@ -343,7 +328,6 @@ export default {
     0 0 2.8rem #bc13fe,
     inset 0 0 1.3rem #bc13fe;
 }
-
 @keyframes pulsate {
   100% {
     text-shadow:
@@ -356,7 +340,6 @@ export default {
       0 0 100px #bc13fe,
       0 0 150px #bc13fe;
   }
-
   0% {
     text-shadow:
       0 0 2px #fff,
