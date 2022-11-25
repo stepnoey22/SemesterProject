@@ -26,11 +26,11 @@ public class Shop {
 	@JoinColumn(name="manager_id")
 	private Manager manager;
 
-    // @OneToMany(mappedBy = "book")
-    // private Set<Book> book;
+    @OneToMany(mappedBy = "shop")
+    private Set<Book> book;
 
-    // @OneToMany(mappedBy = "food")
-    // private Set<Food> food;
+    @OneToMany(mappedBy = "shop")
+    private Set<Food> food;
 
 	public Shop() {
 
@@ -41,21 +41,21 @@ public class Shop {
 		this.description = description;
 	}
 
-	// public Set<Food> getFood() {
-    //     return food;
-    // }
+	public Set<Food> getFood() {
+        return food;
+    }
 
-    // public void setFood(Set<Food> food) {
-    //     this.food = food;
-    // }
+    public void setFood(Set<Food> food) {
+        this.food = food;
+    }
 
-    // public Set<Book> getBook() {
-    //     return book;
-    // }
+    public Set<Book> getBook() {
+        return book;
+    }
 
-    // public void setBook(Set<Book> book) {
-    //     this.book = book;
-    // }
+    public void setBook(Set<Book> book) {
+        this.book = book;
+    }
 
     public Manager getManager() {
 		return manager;

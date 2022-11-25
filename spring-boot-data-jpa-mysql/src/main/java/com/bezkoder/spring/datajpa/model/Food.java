@@ -65,7 +65,7 @@ public class Food {
 
 	@Override
 	public String toString() {
-		return "Shop [id=" + id + ", foodName=" + foodName + ", desc=" + description + "]";
+		return "Food [id=" + id + ", foodName=" + foodName + ", desc=" + description + "]";
 	}
 
 }
