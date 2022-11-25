@@ -50,8 +50,8 @@ public class Food {
 		return foodName;
 	}
 
-	public void setfoodName(String bookName) {
-		this.foodName = bookName;
+	public void setfoodName(String foodName) {
+		this.foodName = foodName;
 	}
 
 	public String getDescription() {
@@ -65,7 +65,7 @@ public class Food {
 
 	@Override
 	public String toString() {
-		return "Shop [id=" + id + ", bookName=" + foodName + ", desc=" + description + "]";
+		return "Shop [id=" + id + ", foodName=" + foodName + ", desc=" + description + "]";
 	}
 
 }
