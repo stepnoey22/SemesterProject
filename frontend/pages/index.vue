@@ -292,7 +292,7 @@ export default {
   position: relative;
   display: inline-block;
   font-size: 40px;
-  color: rgb(255, 255, 255);
+  color: rgb(0, 0, 0);
   text-transform: uppercase;
   animation: flip 2s infinite;
   animation-delay: calc(.1s * var(--i))
@@ -304,7 +304,7 @@ export default {
   }
 }
 .neonText {
-  color: #fff;
+  color: rgb(0, 0, 0);
   text-shadow:
     0 0 7px #fff,
     0 0 10px #fff,
