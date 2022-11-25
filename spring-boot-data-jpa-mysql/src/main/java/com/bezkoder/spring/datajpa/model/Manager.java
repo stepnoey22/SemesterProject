@@ -34,8 +34,6 @@ public class Manager {
 		this.lastname = lastname;
 	}
 
-    
-
 	public Set<Shop> getShop() {
         return shop;
     }

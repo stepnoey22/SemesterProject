@@ -21,7 +21,14 @@ export default {
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
     ]
   },
+  ssr: false,
+  server: {
 
+    port: 8081, // default: 3000
+
+    host: 'localhost' // default: localhost
+
+  },
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
   ],
@@ -67,7 +74,8 @@ export default {
           success: colors.green.accent3
         }
       }
-    }
+    },
+    
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build

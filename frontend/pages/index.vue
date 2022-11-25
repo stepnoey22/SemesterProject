@@ -2,24 +2,155 @@
   <div>
     <div style="text-align: -webkit-center;">
       <div class="waviy neonText neon" style="text-align: center; margin: 2%; font-size: 24px; width:500px">
-        <span style="--i:1">G</span>
-        <span style="--i:2">R</span>
+        <span style="--i:1">S</span>
+        <span style="--i:2">H</span>
         <span style="--i:3">O</span>
-        <span style="--i:4">C</span>
-        <span style="--i:5">E</span>
-        <span style="--i:6">R</span>
-        <span style="--i:7">Y</span>
-        <span style="--i:8"> </span>
-        <span style="--i:9">S</span>
-        <span style="--i:10">T</span>
-        <span style="--i:11">O</span>
+        <span style="--i:4">P</span>
+        <span style="--i:5"> </span>
+        <span style="--i:6">M</span>
+        <span style="--i:7">A</span>
+        <span style="--i:8">N</span>
+        <span style="--i:9">A</span>
+        <span style="--i:10">G</span>
+        <span style="--i:11">E</span>
         <span style="--i:12">R</span>
-        <span style="--i:13">E</span>
-        <span style="--i:14">S</span>
-
       </div>
+      <h6>{{manager}}</h6>
+      <v-divider></v-divider>
+      <div>
+        <v-card class="mr-2 ml-2 mt-2 mb-4 borders" v-for="(item, index) in manager" :key="index" outlined elevation="24">
+          <v-toolbar flat>
+            <v-card-title>
+              Manager Name: {{ item.name }} {{ item.lastname }}
+            </v-card-title>
+            <v-divider class="mx-4" inset vertical></v-divider>
+            <v-spacer></v-spacer>
+            <template>
+                <v-btn color="primary" dark class="mb-2" @click="(dialog = !dialog)">
+                  Edit Manager
+                </v-btn>
+            </template>
+            <v-dialog v-model="dialog" max-width="500px">
+              <v-card>
+                <v-card-title>
+                  <span class="text-h5">Edit Manager</span>
+                </v-card-title>
+            
+                <v-card-text>
+                  <v-container>
+                    <v-row>
+                      <v-col cols="12" sm="12" md="12">
+                        <v-text-field v-model="Manager_name" label="Manager name"></v-text-field>
+                      </v-col>
+                    </v-row>
+                  </v-container>
+                </v-card-text>
+            
+                <v-card-actions>
+                  <v-spacer></v-spacer>
+                  <v-btn color="blue darken-1" text>
+                    Cancel
+                  </v-btn>
+                  <v-btn color="blue darken-1" text>
+                    Save
+                  </v-btn>
+                </v-card-actions>
+              </v-card>
+            </v-dialog>
+          </v-toolbar>
+          
+          <v-divider></v-divider>
+          <div>
+            <v-card-text class="" style="text-align: left; font-size:18px;">
+             <span style="font-weight: bolder;">Shop Name:</span> {{ item.shop[index].shopName }} <br />
+             <span style="font-weight: bolder;">Description:</span> {{ item.shop[index].description }}
+            </v-card-text>
+
+          </div>
+          <v-divider></v-divider>
+          <!-- Boook -->
+          <v-simple-table>
+            <template>
+              <thead>
+                <tr>
+                  <th class="text-left" style="border-top: solid; border-bottom: solid; color: #000000; font-size: 18px;">
+                    ID
+                  </th>
+                  <th class="text-left" style="border-top: solid; border-bottom: solid; color: #000000; font-size: 18px;">
+                    Books
+                  </th>
+                  <th class="text-left" style="border-top: solid; border-bottom: solid; color: #000000; font-size: 18px;">
+                    Description
+                  </th>
+                  <th class="text-left" style="border-top: solid; border-bottom: solid; color: #000000; font-size: 18px;">
+                    Action
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr v-for="(countbook, indexbook) in manager[index].shop[index].book" :key="indexbook">
+                  <td>{{ indexbook + 1 }}</td>
+                  <td>{{ countbook.bookName }}</td>
+                  <td>{{ countbook.description }}</td>
+                  <td>
+                    <template>
+                      <v-icon small class="mr-2">
+                        mdi-pencil
+                      </v-icon>
+                      <v-icon small >
+                        mdi-delete
+                      </v-icon>
+                    </template>
+                  </td>
+                </tr>
+              </tbody>
+            </template>
+          </v-simple-table>
+          <!-- Foods -->
+          <v-divider></v-divider>
+          <v-simple-table>
+            <template>
+              <thead >
+                <tr >
+                  <th class="text-left" style="border-top: solid; border-bottom: solid; color: #000000; font-size: 18px;">
+                    ID
+                  </th>
+                  <th class="text-left" style="border-top: solid; border-bottom: solid; color: #000000; font-size: 18px;">
+                    Foods
+                  </th>
+                  <th class="text-left" style="border-top: solid; border-bottom: solid; color: #000000; font-size: 18px;">
+                    Description
+                  </th>
+                  <th class="text-left" style="border-top: solid; border-bottom: solid; color: #000000; font-size: 18px;">
+                    Action
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr v-for="(countfood, indexfood) in manager[index].shop[index].food" :key="indexfood">
+                  <td>{{ indexfood + 1 }}</td>
+                  <td>{{ countfood.foodName }}</td>
+                  <td>{{ countfood.description }}</td>
+                  <td>
+                    <template>
+                      <v-icon small class="mr-2" @click="editItem(item)">
+                        mdi-pencil
+                      </v-icon>
+                      <v-icon small @click="deleteItem(item)">
+                        mdi-delete
+                      </v-icon>
+                    </template>
+                  </td>
+                </tr>
+              </tbody>
+            </template>
+          </v-simple-table>
+          <!--  -->
+        </v-card>
+      </div>
+      <!--  -->
     </div>
-    <v-card class="mr-2 ml-2 mt-2 mb-4 borders" outlined shaped elevation="24" v-for="(item, index) in 1" :key="index">
+    <v-card class="mr-2 ml-2 mt-2 mb-4 borders" outlined elevation="24" v-for="(item, index) in 1" :key="index">
       <v-toolbar flat>
         <v-toolbar-title class="">{{ shop }}</v-toolbar-title>
         <v-divider class="mx-4" inset vertical></v-divider>
@@ -155,11 +286,13 @@
 </template>
 
 <script>
-const URL = "";
+const URL = "http://localhost:8080";
 import 'animate.css';
 
 export default {
   data: () => ({
+    manager:[],
+    Manager_name:"",
     dialog: false,
     title_popup: false,
     dialogDelete: false,
@@ -193,10 +326,22 @@ export default {
   },
 
   created() {
-    this.initialize()
+    this.initialize(),
+    this.getManager()
   },
 
   methods: {
+    async getManager() {
+      await this.$axios.get(URL + "/api/managers").then((data) => {
+        this.manager = data.data;
+        
+        // this.call = this.consoutant[0].attributes.ct_tel;
+        // this.imgs = data.data.data;
+        console.log(data.data[0].shop[0].book[0].bookName);
+      });
+    },
+
+
     initialize() {
       this.desserts = [
         {
@@ -297,6 +442,7 @@ export default {
   animation: flip 2s infinite;
   animation-delay: calc(.1s * var(--i))
 }
+
 @keyframes flip {
   0%,
   80% {
@@ -352,8 +498,8 @@ export default {
       0 0 80px #bc13fe;
   }
 }
-
 .borders {
-  border-color: #bc13fe;
+  border-color: rgb(0, 0, 0);
 }
+
 </style>
