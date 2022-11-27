@@ -15,10 +15,203 @@
         <span style="--i:11">E</span>
         <span style="--i:12">R</span>
       </div>
-      <h6>{{manager}}</h6>
+      <!-- <h6>{{ manager }}</h6> -->
       <v-divider></v-divider>
       <div>
-        <v-card class="mr-2 ml-2 mt-2 mb-4 borders" v-for="(item, index) in manager" :key="index" outlined elevation="24">
+        <!-- dialog edit manager -->
+        <v-dialog v-model="dialog" max-width="500px">
+          <v-card>
+            <v-card-title>
+              <span class="text-h5">Edit Manager</span>
+            </v-card-title>
+            <v-card-text>
+              <v-container>
+                <v-row>
+                  <v-col cols="12" sm="12" md="12">
+                    <v-text-field v-model="Manager_name" label="Name"></v-text-field>
+                  </v-col>
+                  <v-col cols="12" sm="12" md="12">
+                    <v-text-field v-model="Manager_lastname" label="Lastname"></v-text-field>
+                  </v-col>
+                  <v-col cols="12" sm="12" md="12">
+                    <v-text-field v-model="Shop_name" label="Shop name"></v-text-field>
+                  </v-col>
+                  <v-col cols="12" sm="12" md="12">
+                    <v-text-field v-model="Detail_name" label="Description"></v-text-field>
+                  </v-col>
+                </v-row>
+              </v-container>
+            </v-card-text>
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn color="blue darken-1" text @click="(dialog = !dialog)">
+                Cancel
+              </v-btn>
+              <v-btn color="blue darken-1" text>
+                Save
+              </v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
+        <!-- dialog new book -->
+        <v-dialog v-model="dialog2" max-width="500px">
+          <v-card>
+            <v-card-title>
+              <span class="text-h5">New book</span>
+            </v-card-title>
+            <v-card-text>
+              <v-container>
+                <v-row>
+                  <v-col cols="12" sm="12" md="12">
+                    <v-text-field v-model="Book_name" label="Book name"></v-text-field>
+                  </v-col>
+                  <v-col cols="12" sm="12" md="12">
+                    <v-text-field v-model="Description_book" label="Description"></v-text-field>
+                  </v-col>
+                </v-row>
+              </v-container>
+            </v-card-text>
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn color="blue darken-1" text @click="(dialog2 = !dialog2)">
+                Cancel
+              </v-btn>
+              <v-btn color="blue darken-1" text @click="(add_book(Book_name, Description_book)), (dialog2 = !dialog2)">
+                Save
+              </v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
+        <!-- dialog new food -->
+        <v-dialog v-model="dialog3" max-width="500px">
+          <v-card>
+            <v-card-title>
+              <span class="text-h5">New Food</span>
+            </v-card-title>
+            <v-card-text>
+              <v-container>
+                <v-row>
+                  <v-col cols="12" sm="12" md="12">
+                    <v-text-field v-model="Food_name" label="Food name"></v-text-field>
+                  </v-col>
+                  <v-col cols="12" sm="12" md="12">
+                    <v-text-field v-model="Description_food" label="Description"></v-text-field>
+                  </v-col>
+                </v-row>
+              </v-container>
+            </v-card-text>
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn color="blue darken-1" text @click="(dialog3 = !dialog3)">
+                Cancel
+              </v-btn>
+              <v-btn color="blue darken-1" text @click="(add_food(Food_name, Description_food)), (dialog3 = !dialog3)">
+                Save
+              </v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
+        <!-- dialog edit book -->
+        <v-dialog v-model="edit_book_dialog" max-width="500px">
+          <v-card>
+            <v-card-title>
+              <span class="text-h5">Edit Book</span>
+            </v-card-title>
+            <v-card-text>
+              <v-container>
+                <v-row>
+                  <v-col cols="12" sm="12" md="12">
+                    <v-text-field v-model="edit_book_name" label="Book name"></v-text-field>
+                  </v-col>
+                  <v-col cols="12" sm="12" md="12">
+                    <v-text-field v-model="edit_book_detail" label="Description"></v-text-field>
+                  </v-col>
+                </v-row>
+              </v-container>
+            </v-card-text>
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn color="blue darken-1" text @click="(edit_book_dialog = !edit_book_dialog)">
+                Cancel
+              </v-btn>
+              <v-btn color="blue darken-1" text
+                @click="(edit_books(book_ids, edit_book_name, edit_book_detail)), (edit_book_dialog = !edit_book_dialog)">
+                Save
+              </v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
+        <!-- dialog edit food -->
+        <v-dialog v-model="edit_food_dialog" max-width="500px">
+          <v-card>
+            <v-card-title>
+              <span class="text-h5">Edit Book</span>
+            </v-card-title>
+            <v-card-text>
+              <v-container>
+                <v-row>
+                  <v-col cols="12" sm="12" md="12">
+                    <v-text-field v-model="edit_food_name" label="food name"></v-text-field>
+                  </v-col>
+                  <v-col cols="12" sm="12" md="12">
+                    <v-text-field v-model="edit_food_detail" label="Description"></v-text-field>
+                  </v-col>
+                </v-row>
+              </v-container>
+            </v-card-text>
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn color="blue darken-1" text @click="(edit_food_dialog = !edit_food_dialog)">
+                Cancel
+              </v-btn>
+              <v-btn color="blue darken-1" text
+                @click="(edit_foods(food_ids, edit_food_name, edit_food_detail)), (edit_food_dialog = !edit_food_dialog)">
+                Save
+              </v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
+        <!-- dialog delete book -->
+        <v-dialog v-model="delete_book" max-width="500px">
+          <v-card>
+            <v-card-title>
+              <span class="text-h5">Do you want dalete this book</span>
+            </v-card-title>
+            <v-card-text>
+            </v-card-text>
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn color="blue darken-1" text @click="(delete_book = !delete_book)">
+                Cancel
+              </v-btn>
+              <v-btn color="blue darken-1" text @click="(deleteBook(book_ids)), (delete_book = !delete_book)">
+                Save
+              </v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
+        <!-- dialog delete food -->
+        <v-dialog v-model="delete_food" max-width="500px">
+          <v-card>
+            <v-card-title>
+              <span class="text-h5">Do you want dalete this food</span>
+            </v-card-title>
+            <v-card-text>
+            </v-card-text>
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn color="blue darken-1" text @click="(delete_food = !delete_food)">
+                Cancel
+              </v-btn>
+              <v-btn color="blue darken-1" text @click="deleteFood(food_ids), (delete_food = !delete_food)">
+                Save
+              </v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
+        <!--  -->
+        <v-card class="mr-2 ml-2 mt-2 mb-4 borders" outlined v-for="(item, index) in manager" :key="index"
+          elevation="24">
           <v-toolbar flat>
             <v-card-title>
               Manager Name: {{ item.name }} {{ item.lastname }}
@@ -26,78 +219,61 @@
             <v-divider class="mx-4" inset vertical></v-divider>
             <v-spacer></v-spacer>
             <template>
-                <v-btn color="primary" dark class="mb-2" @click="(dialog = !dialog)">
-                  Edit Manager
-                </v-btn>
+              <v-btn color="primary" dark class="mb-2 mr-3" @click="(dialog2 = !dialog2)">
+                New Book
+              </v-btn>
             </template>
-            <v-dialog v-model="dialog" max-width="500px">
-              <v-card>
-                <v-card-title>
-                  <span class="text-h5">Edit Manager</span>
-                </v-card-title>
-            
-                <v-card-text>
-                  <v-container>
-                    <v-row>
-                      <v-col cols="12" sm="12" md="12">
-                        <v-text-field v-model="Manager_name" label="Manager name"></v-text-field>
-                      </v-col>
-                    </v-row>
-                  </v-container>
-                </v-card-text>
-            
-                <v-card-actions>
-                  <v-spacer></v-spacer>
-                  <v-btn color="blue darken-1" text>
-                    Cancel
-                  </v-btn>
-                  <v-btn color="blue darken-1" text>
-                    Save
-                  </v-btn>
-                </v-card-actions>
-              </v-card>
-            </v-dialog>
+            <template>
+              <v-btn color="primary" dark class="mb-2 mr-3" @click="(dialog3 = !dialog3)">
+                New Food
+              </v-btn>
+            </template>
           </v-toolbar>
-          
           <v-divider></v-divider>
           <div>
-            <v-card-text class="" style="text-align: left; font-size:18px;">
-             <span style="font-weight: bolder;">Shop Name:</span> {{ item.shop[index].shopName }} <br />
-             <span style="font-weight: bolder;">Description:</span> {{ item.shop[index].description }}
+            <v-card-text class="" style="text-align: left; font-size:18px;" v-for="(a, indexs) in manager[index].shop"
+              :key="indexs">
+              <span style="font-weight: bolder;">Shop Name:</span> {{ a.shopName }} <br />
+              <span style="font-weight: bolder;">Description:</span> {{ a.description }}
             </v-card-text>
-
           </div>
+          <v-divider></v-divider>
           <v-divider></v-divider>
           <!-- Boook -->
           <v-simple-table>
             <template>
               <thead>
                 <tr>
-                  <th class="text-left" style="border-top: solid; border-bottom: solid; color: #000000; font-size: 18px;">
+                  <th class="text-left"
+                    style="border-top: solid; border-bottom: solid; color: #000000; font-size: 18px;">
                     ID
                   </th>
-                  <th class="text-left" style="border-top: solid; border-bottom: solid; color: #000000; font-size: 18px;">
+                  <th class="text-left"
+                    style="border-top: solid; border-bottom: solid; color: #000000; font-size: 18px;">
                     Books
                   </th>
-                  <th class="text-left" style="border-top: solid; border-bottom: solid; color: #000000; font-size: 18px;">
+                  <th class="text-left"
+                    style="border-top: solid; border-bottom: solid; color: #000000; font-size: 18px;">
                     Description
                   </th>
-                  <th class="text-left" style="border-top: solid; border-bottom: solid; color: #000000; font-size: 18px;">
+                  <th class="text-left"
+                    style="border-top: solid; border-bottom: solid; color: #000000; font-size: 18px;">
                     Action
                   </th>
                 </tr>
               </thead>
-              <tbody>
-                <tr v-for="(countbook, indexbook) in manager[index].shop[index].book" :key="indexbook">
-                  <td>{{ indexbook + 1 }}</td>
-                  <td>{{ countbook.bookName }}</td>
-                  <td>{{ countbook.description }}</td>
+              <tbody v-for="(countbook, indexbook) in manager[index].shop" :key="indexbook">
+                <tr v-for="(bb, indexbooks) in manager[index].shop[indexbook].book" :key="indexbooks">
+                  <td>{{ indexbooks + 1 }}</td>
+                  <td>{{ bb.bookName }}</td>
+                  <td>{{ bb.description }}</td>
                   <td>
                     <template>
-                      <v-icon small class="mr-2">
+                      <v-icon small class="mr-2"
+                        @click="edit_book(bb.id, bb.bookName, bb.description), (edit_book_dialog = !edit_book_dialog)">
                         mdi-pencil
                       </v-icon>
-                      <v-icon small >
+                      <v-icon small @click="(delete_books(bb.id)), (delete_book = !delete_book)">
                         mdi-delete
                       </v-icon>
                     </template>
@@ -110,33 +286,38 @@
           <v-divider></v-divider>
           <v-simple-table>
             <template>
-              <thead >
-                <tr >
-                  <th class="text-left" style="border-top: solid; border-bottom: solid; color: #000000; font-size: 18px;">
+              <thead>
+                <tr>
+                  <th class="text-left"
+                    style="border-top: solid; border-bottom: solid; color: #000000; font-size: 18px;">
                     ID
                   </th>
-                  <th class="text-left" style="border-top: solid; border-bottom: solid; color: #000000; font-size: 18px;">
+                  <th class="text-left"
+                    style="border-top: solid; border-bottom: solid; color: #000000; font-size: 18px;">
                     Foods
                   </th>
-                  <th class="text-left" style="border-top: solid; border-bottom: solid; color: #000000; font-size: 18px;">
+                  <th class="text-left"
+                    style="border-top: solid; border-bottom: solid; color: #000000; font-size: 18px;">
                     Description
                   </th>
-                  <th class="text-left" style="border-top: solid; border-bottom: solid; color: #000000; font-size: 18px;">
+                  <th class="text-left"
+                    style="border-top: solid; border-bottom: solid; color: #000000; font-size: 18px;">
                     Action
                   </th>
                 </tr>
               </thead>
-              <tbody>
-                <tr v-for="(countfood, indexfood) in manager[index].shop[index].food" :key="indexfood">
-                  <td>{{ indexfood + 1 }}</td>
-                  <td>{{ countfood.foodName }}</td>
-                  <td>{{ countfood.description }}</td>
+              <tbody v-for="(countfood, indexfood) in manager[index].shop" :key="indexfood">
+                <tr v-for="(cc, indexfoods) in manager[index].shop[indexfood].food" :key="indexfoods">
+                  <td>{{ indexfoods + 1 }}</td>
+                  <td>{{ cc.foodName }}</td>
+                  <td>{{ cc.description }}</td>
                   <td>
                     <template>
-                      <v-icon small class="mr-2" @click="editItem(item)">
+                      <v-icon small class="mr-2"
+                        @click="edit_food(cc.id, cc.foodName, cc.description), (edit_food_dialog = !edit_food_dialog)">
                         mdi-pencil
                       </v-icon>
-                      <v-icon small @click="deleteItem(item)">
+                      <v-icon small @click="(delete_foods(cc.id)), (delete_food = !delete_food)">
                         mdi-delete
                       </v-icon>
                     </template>
@@ -145,143 +326,9 @@
               </tbody>
             </template>
           </v-simple-table>
-          <!--  -->
         </v-card>
       </div>
-      <!--  -->
     </div>
-    <v-card class="mr-2 ml-2 mt-2 mb-4 borders" outlined elevation="24" v-for="(item, index) in 1" :key="index">
-      <v-toolbar flat>
-        <v-toolbar-title class="">{{ shop }}</v-toolbar-title>
-        <v-divider class="mx-4" inset vertical></v-divider>
-        <v-icon small class="mr-2" @click="editshop(shop)">
-          mdi-pencil
-        </v-icon>
-        <!-- <v-icon small @click="deleteshop">
-              mdi-delete
-            </v-icon> -->
-        <v-spacer></v-spacer>
-        <!-- แก้ไขร้านค้า -->
-        <v-dialog v-model="title_popup" max-width="500px">
-          <v-card>
-            <v-card-title>
-              <span class="text-h5">Edit Shop</span>
-            </v-card-title>
-
-            <v-card-text>
-              <v-container>
-                <v-row>
-                  <v-col cols="12" sm="12" md="12">
-                    <v-text-field v-model="edittitle" label="Name Shop"></v-text-field>
-                  </v-col>
-                </v-row>
-              </v-container>
-            </v-card-text>
-
-            <v-card-actions>
-              <v-spacer></v-spacer>
-              <v-btn color="blue darken-1" text>
-                Cancel
-              </v-btn>
-              <v-btn color="blue darken-1" text @click="SavaShop(edittitle)">
-                Save
-              </v-btn>
-            </v-card-actions>
-          </v-card>
-        </v-dialog>
-        <!-- ลบร้าน -->
-        <!-- <v-dialog v-model="delete_shop" max-width="650px">
-              <v-card>
-                <v-card-title class="text-h5">Are you sure you want to delete this Shop?</v-card-title>
-                <v-card-actions>
-                  <v-spacer></v-spacer>
-                  <v-btn color="blue darken-1" text @click="closeDelete">Cancel</v-btn>
-                  <v-btn color="blue darken-1" text @click="deleteshopconfirm">OK</v-btn>
-                  <v-spacer></v-spacer>
-                </v-card-actions>
-              </v-card>
-            </v-dialog> -->
-        <!-- /แก้ไขร้านค้า -->
-        <v-dialog v-model="dialog" max-width="500px">
-          <template v-slot:activator="{ on, attrs }">
-            <v-btn color="primary" dark class="mb-2" v-bind="attrs" v-on="on">
-              New Item
-            </v-btn>
-          </template>
-          <v-card>
-            <v-card-title>
-              <span class="text-h5">{{ formTitle }}</span>
-            </v-card-title>
-
-            <v-card-text>
-              <v-container>
-                <v-row>
-                  <v-col cols="12" sm="12" md="12">
-                    <v-text-field v-model="editedItem.name" label="Item name"></v-text-field>
-                  </v-col>
-                </v-row>
-              </v-container>
-            </v-card-text>
-
-            <v-card-actions>
-              <v-spacer></v-spacer>
-              <v-btn color="blue darken-1" text @click="close">
-                Cancel
-              </v-btn>
-              <v-btn color="blue darken-1" text @click="save">
-                Save
-              </v-btn>
-            </v-card-actions>
-          </v-card>
-        </v-dialog>
-        <v-dialog v-model="dialogDelete" max-width="500px">
-          <v-card>
-            <v-card-title class="text-h5">Are you sure you want to delete this item?</v-card-title>
-            <v-card-actions>
-              <v-spacer></v-spacer>
-              <v-btn color="blue darken-1" text @click="closeDelete">Cancel</v-btn>
-              <v-btn color="blue darken-1" text @click="deleteItemConfirm">OK</v-btn>
-              <v-spacer></v-spacer>
-            </v-card-actions>
-          </v-card>
-        </v-dialog>
-      </v-toolbar>
-      <!--  -->
-      <v-simple-table>
-        <template>
-          <thead>
-            <tr>
-              <th class="text-left">
-                ID
-              </th>
-              <th class="text-left">
-                Item
-              </th>
-              <th class="text-left">
-                Action
-              </th>
-            </tr>
-          </thead>
-          <!--  -->
-          <tbody>
-            <tr v-for="(item, index) in desserts" :key="index">
-              <td>{{ index + 1 }}</td>
-              <td>{{ item.name }}</td>
-              <td>
-                <template>
-                  <v-icon small class="mr-2" @click="editItem(item)">
-                    mdi-pencil
-                  </v-icon>
-                  <v-icon small @click="deleteItem(item)">
-                    mdi-delete
-                  </v-icon>
-                </template>
-              </td>
-            </tr>
-          </tbody>
-        </template>
-      </v-simple-table>
-    </v-card>
   </div>
 </template>
 
@@ -291,42 +338,31 @@ import 'animate.css';
 
 export default {
   data: () => ({
-    manager:[],
-    Manager_name:"",
+    manager: [],
+    Manager_name: "",
+    Manager_lastname: "",
+    Shop_name: "",
+    Detail_name: "",
+    Book_name: "",
+    Description_book: "",
+    Food_name: "",
+    Description_food: "",
     dialog: false,
-    title_popup: false,
-    dialogDelete: false,
-    delete_shop: false,
-    shopindex: "",
-    shop: "Somsee Shop barber",
-    edittitle: "",
-    desserts: [],
-    editedIndex: -1,
-    editedItem: {
-      name: '',
-    },
-    defaultItem: {
-      name: '',
-    },
+    dialog2: false,
+    dialog3: false,
+    edit_book_dialog: false,
+    edit_food_dialog: false,
+    edit_book_name: "",
+    edit_book_detail: "",
+    edit_food_name: "",
+    edit_food_detail: "",
+    delete_book: false,
+    delete_food: false,
+    book_ids: "",
+    food_ids: "",
   }),
 
-  computed: {
-    formTitle() {
-      return this.editedIndex === -1 ? 'New Item' : 'Edit Item'
-    },
-  },
-
-  watch: {
-    dialog(val) {
-      val || this.close()
-    },
-    dialogDelete(val) {
-      val || this.closeDelete()
-    },
-  },
-
   created() {
-    this.initialize(),
     this.getManager()
   },
 
@@ -334,90 +370,117 @@ export default {
     async getManager() {
       await this.$axios.get(URL + "/api/managers").then((data) => {
         this.manager = data.data;
-        
         // this.call = this.consoutant[0].attributes.ct_tel;
         // this.imgs = data.data.data;
         console.log(data.data[0].shop[0].book[0].bookName);
       });
     },
 
-
-    initialize() {
-      this.desserts = [
-        {
-          name: 'Frozen Yogurt',
-        },
-        {
-          name: 'Ice cream sandwich',
-        },
-        {
-          name: 'Eclair',
-        },
-      ]
+    async deleteBook(id) {
+      console.log(id);
+      await this.$axios.delete(URL + "/api/books/" + id).then((data) => {
+        this.getManager();
+        alert("Deleted Book Successfully");
+      });
     },
 
-    editshop(item) {
-      this.edittitle = item
-      this.title_popup = true
-      console.log(this.edittitle + " " + this.shopindex)
+    async deleteFood(id) {
+      console.log(id);
+      await this.$axios.delete(URL + "/api/foods/" + id).then((data) => {
+        this.getManager();
+        alert("Deleted Food Successfully");
+      });
     },
 
-    SavaShop(text) {
-      this.shop = text
-      this.title_popup = false
+    edit_books(id, name, detail) {
+      this.$axios
+        .put(URL + "/api/books/" + id, {
+          bookName: name,
+          description: detail
+        })
+        .then((data) => {
+          alert("Edit Successfully!");
+          this.getManager();
+        })
+        .catch((err) => console.log(err));
     },
 
-    deleteshop() {
-      console.log("hello world")
-      this.delete_shop = true
+    edit_foods(id, name, detail) {
+      this.$axios
+        .put(URL + "/api/foods/" + id, {
+          foodName: name,
+          description: detail
+        })
+        .then((data) => {
+          alert("Edit Successfully!");
+          this.getManager();
+        })
+        .catch((err) => console.log(err));
     },
 
-    deleteshopconfirm() {
-      console.log("hello world")
-      this.delete_shop = false
+
+    edit_book(id, bookName, description_book) {
+      this.book_ids = id;
+      this.edit_book_name = bookName;
+      this.edit_book_detail = description_book;
+      console.log(id);
+      console.log(bookName);
+      console.log(description_book);
     },
 
-    editItem(item) {
-      this.editedIndex = this.desserts.indexOf(item)
-      this.editedItem = Object.assign({}, item)
-      this.dialog = true
+    edit_food(id, foodName, description_food) {
+      this.food_ids = id;
+      this.edit_food_name = foodName;
+      this.edit_food_detail = description_food;
+      console.log(id);
+      console.log(foodName);
+      console.log(description_food);
     },
 
-    deleteItem(item) {
-      this.editedIndex = this.desserts.indexOf(item)
-      this.editedItem = Object.assign({}, item)
-      this.dialogDelete = true
+    edit_manager_all(name, lastname, shop, description) {
+      this.Manager_name = name;
+      this.Manager_lastname = lastname;
+      this.Shop_name = shop;
+      this.Detail_name = description;
     },
 
-    deleteItemConfirm() {
-      this.desserts.splice(this.editedIndex, 1)
-      this.closeDelete()
+    delete_books(book_id) {
+      this.book_ids = book_id;
+      console.log(book_id);
     },
 
-    close() {
-      this.dialog = false
-      this.$nextTick(() => {
-        this.editedItem = Object.assign({}, this.defaultItem)
-        this.editedIndex = -1
-      })
+    delete_foods(food_id) {
+      this.food_ids = food_id;
+      console.log(food_id);
     },
 
-    closeDelete() {
-      this.dialogDelete = false
-      this.$nextTick(() => {
-        this.editedItem = Object.assign({}, this.defaultItem)
-        this.editedIndex = -1
-      })
+    async add_book(name, Description) {
+      await this.$axios.post(URL + "/api/books", {
+        bookName: name,
+        description: Description
+      }).then((response) => {
+        console.log(response);
+        alert("Add Book Success");
+        console.log("Add Book Success");
+        this.getManager();
+      }).catch((err) => {
+        console.log(err);
+      });
     },
 
-    save() {
-      if (this.editedIndex > -1) {
-        Object.assign(this.desserts[this.editedIndex], this.editedItem)
-      } else {
-        this.desserts.push(this.editedItem)
-      }
-      this.close()
-    },
+    async add_food(name, Description) {
+      await this.$axios.post(URL + "/api/foods", {
+        foodName: name,
+        description: Description
+      }).then((response) => {
+        console.log(response);
+        alert("Add Food Success");
+        console.log("Add Food Success");
+        this.getManager();
+      }).catch((err) => {
+        console.log(err);
+      });
+    }
   },
 }
 </script>
@@ -426,10 +489,12 @@ export default {
 .animate__animated.animate__bounce {
   --animate-duration: 2s;
 }
+
 :root {
   --animate-duration: 600ms;
   --animate-delay: 0.9s;
 }
+
 .waviy {
   position: relative;
 }
@@ -474,6 +539,7 @@ export default {
     0 0 2.8rem #bc13fe,
     inset 0 0 1.3rem #bc13fe;
 }
+
 @keyframes pulsate {
   100% {
     text-shadow:
@@ -486,6 +552,7 @@ export default {
       0 0 100px #bc13fe,
       0 0 150px #bc13fe;
   }
+
   0% {
     text-shadow:
       0 0 2px #fff,
@@ -501,5 +568,4 @@ export default {
 .borders {
   border-color: rgb(0, 0, 0);
 }
-
 </style>

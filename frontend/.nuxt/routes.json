@@ -3,14 +3,12 @@
     "name": "inspire",
     "path": "/inspire",
     "component": "D:\\\\Project\\\\SemesterProject\\\\frontend\\\\pages\\\\inspire.vue",
-    "chunkName": "pages/inspire",
-    "_name": "_1d894974"
+    "chunkName": "pages/inspire"
   },
   {
     "name": "index",
     "path": "/",
     "component": "D:\\\\Project\\\\SemesterProject\\\\frontend\\\\pages\\\\index.vue",
-    "chunkName": "pages/index",
-    "_name": "_50149bec"
+    "chunkName": "pages/index"
   }
 ]
