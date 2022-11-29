@@ -23,11 +23,8 @@ export default {
   },
   ssr: false,
   server: {
-
     port: 8081, // default: 3000
-
     host: 'localhost' // default: localhost
-
   },
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [

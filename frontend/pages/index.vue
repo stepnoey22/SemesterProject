@@ -145,7 +145,7 @@
         <v-dialog v-model="edit_food_dialog" max-width="500px">
           <v-card>
             <v-card-title>
-              <span class="text-h5">Edit Book</span>
+              <span class="text-h5">Edit Food</span>
             </v-card-title>
             <v-card-text>
               <v-container>
@@ -370,8 +370,6 @@ export default {
     async getManager() {
       await this.$axios.get(URL + "/api/managers").then((data) => {
         this.manager = data.data;
-        // this.call = this.consoutant[0].attributes.ct_tel;
-        // this.imgs = data.data.data;
         console.log(data.data[0].shop[0].book[0].bookName);
       });
     },
@@ -498,22 +496,24 @@ export default {
 .waviy {
   position: relative;
 }
+
 .waviy span {
   position: relative;
   display: inline-block;
   font-size: 40px;
   color: rgb(0, 0, 0);
   text-transform: uppercase;
-  animation: flip 2s infinite;
-  animation-delay: calc(.1s * var(--i))
+  
 }
 
 @keyframes flip {
+
   0%,
   80% {
     transform: rotateY(360deg)
   }
 }
+
 .neonText {
   color: rgb(0, 0, 0);
   text-shadow:
@@ -526,6 +526,7 @@ export default {
     0 0 102px #bc13fe,
     0 0 151px #bc13fe;
 }
+
 .neon {
   font-size: 6.2rem;
   animation: pulsate 1s infinite alternate;
@@ -565,6 +566,7 @@ export default {
       0 0 80px #bc13fe;
   }
 }
+
 .borders {
   border-color: rgb(0, 0, 0);
 }
